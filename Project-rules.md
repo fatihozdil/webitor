@@ -1,5 +1,5 @@
 # Perfect Commit
-Don't commit all changes in one message, you can seperate them by choosing the files are changed.
+Don't commit all changes in one message, seperate them by choosing the files are changed.
 
 - Add specific file 
 ```git add css/general.css```
@@ -8,7 +8,7 @@ Don't commit all changes in one message, you can seperate them by choosing the f
 ```git diff index.html```
 
 - If you want to add only some changes in index.html
-```git add -p index.html``` Then git will  ask you the parts you want to add
+```git add -p index.html``` Then git will ask you the parts you want to add
 
 ## Perfect commit message
 Type ```git commit``` then git will open editor for commit message.
@@ -69,7 +69,8 @@ Make some changes and commit, then push it to your own fork repository by ```git
 Then open the your fork repository on github web, github will notice the change you've made, and there will be a button called ```Compare & Pull Request```if ypu continue with this, the request will appear on the repository's original owner's screen.
 
 # Merge Conflicts
-``` (conflict=çatışma)```
+
+# Merge vs Rebase
 
 
 
