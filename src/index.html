@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>Webitor</title>
   </head>
-  <body class="d-flex vh-100 text-center text-dark bg-secondary">
+  <body class="d-flex vh-100 text-center text-dark bg-light">
 
     <div class="cover-container d-flex w-100 h-100  mx-auto flex-column">
 
@@ -57,20 +57,55 @@
         </div>
       </nav>
 
-      <main class="h-100">
+      <main class="h-100 bg-secondary">
         <div class="container-fluid h-100">
-          <div class="row h-100">
+          <div class="row h-100 ">
             <!-- file manager -->
-            <div class="col-sm-3 d-none d-sm-block bg-primary" id="yellow">
+            <div class="col-sm-3 d-none d-sm-block">
+              <div class="row">
+                <div class="col">
+
+                  <div class="row w-100  mx-0 my-2 py-1 d-flex align-items-baseline">
+                    <div class="col-sm-1 p-0">
+                      <button type="button" class="btn btn-sm btn-outline-dark ">
+                        <i class="far fa-file-alt"></i>
+                      </button>
+                    </div>
+                    <div class="col-sm-10 p-0">
+                      <div class="input-group px-3 d-flex justify-content-center">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-sm btn-outline-dark" type="button" id="button-addon2">
+                          <i class="fas fa-search fa-1x"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 p-0">
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded">
+                        <i class="far fa-file-upload"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
 
             </div>
             <!-- where the text edited -->
-            <div class="col-sm-9 h-100 bg-light">
+            <div class="col-sm-9 h-100 ">
 
               <!-- text ediort nav -->
-              <div class="row  bg-success" style="height: 5%">
+              <div class="row" style="height: 5%">
                 <div class="col">
-                  adf
+                  <div class="rows d-flex justify-content-end">
+
+                    <button type="button" class="btn btn-sm btn-outline-dark rounded mx-2">
+                      save changes
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-outline-dark">
+                      <i class="fas fa-file-download fa-1x"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -82,10 +117,6 @@
           </div>
         </div>
       </main>
-
-
-
-
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
