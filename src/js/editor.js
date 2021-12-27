@@ -1,3 +1,4 @@
+// fix tab issue
 document.getElementById('editor').addEventListener('keydown', function(e) {
   if (e.key == 'Tab') {
     e.preventDefault();
@@ -13,3 +14,24 @@ document.getElementById('editor').addEventListener('keydown', function(e) {
       this.selectionEnd = start + 1;
   }
 });
+
+
+// download current text
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+// call downloader code
+function downloadFile() {
+  const fileContent = document.getElementById("editor").value; 
+  download("temp.txt", fileContent);
+}
