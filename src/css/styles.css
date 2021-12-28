@@ -1,0 +1,9 @@
+body, #editor {
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 14;
+}
+
+/* font awaesome font color */
+#icon-white {
+    color: white;
+}
