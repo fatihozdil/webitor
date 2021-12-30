@@ -1,3 +1,10 @@
+// store current filename
+let currentFileName = "";
+
+// store where 
+// {"filename": "text"}
+let filesData = []
+
 // fix tab issue
 document.getElementById('editor').addEventListener('keydown', function(e) {
   if (e.key == 'Tab') {
@@ -33,5 +40,52 @@ function download(filename, text) {
 // call downloader code
 function downloadFile() {
   const fileContent = document.getElementById("editor").value; 
-  download("temp.txt", fileContent);
+  download(currentFileName, fileContent);
+}
+
+// get filename
+function setFileName() {
+  const filename  = document.getElementById("new-filename").value; 
+  currentFileName = filename;
+  createFile();
+}
+
+
+// create file ui component
+function createFile() {
+  // close filename model
+  document.getElementById("filename-modal").style.display = "none"; 
+  //  const template 
+  const fileContent = document.getElementById("files"); 
+  const template = 
+  `
+  <!-- button template -->
+  <div class="d-flex justify-content-between 
+    align-items-baseline shadow p-2 bg-secondary rounded my-2">
+    <div id="${currentFileName}">
+    ${currentFileName}
+    </div>
+    <div class="d-flex">
+      <button type="button" class=" me-2 btn btn-sm btn-outline-light">
+        <i class="fas fa-pen fa-1x"></i>
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-light">
+        <i class="fas fa-trash fa-1x"></i>
+      </button>
+    </div>
+  </div>
+  `
+
+  // set add  
+  files.innerHTML += template;
+
+
+  console.log(template);
+}
+
+function saveChanges() {
+  const fileContent = document.getElementById("editor").value; 
+  console.log("file is saving")
+  // store files
+  filesData[currentFileName] = fileContent;
 }
