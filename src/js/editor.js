@@ -83,7 +83,26 @@ function createFile() {
   //clearPage();
   //save empty file
   saveChanges();
+
+
+
+
 }
+
+// function activateEnter() {
+
+
+// }
+const rename = document.getElementById('rename')
+
+rename.addEventListener("keydown", function (event) {
+
+
+  if (event.key === "Enter") {
+    setFileName();
+    const a = document.getElementsByClassName('modal-backdrop')[0].style.display = "none";
+  }
+});
 
 //load file content
 function loadFile(event) {
@@ -116,14 +135,8 @@ function clearPage() {
 }
 
 //
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    setFileName();
-  const a =   document.getElementsByClassName('modal-backdrop')[0].style.display = "none";
-  }
 
 
-});
 
 // function pressedEnter(event) {
 //   console.log("pressed");
