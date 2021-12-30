@@ -5,6 +5,9 @@ let currentFileName = "";
 // {"filename": "text"}
 let filesData = [];
 
+// store filebox html
+let fileTemplates = [];
+
 // fix tab issue
 document.getElementById("editor").addEventListener("keydown", function (e) {
   if (e.key == "Tab") {
@@ -51,6 +54,10 @@ function downloadFile() {
 // get filename
 function setFileName() {
   const filename = document.getElementById("new-filename").value;
+
+  // update previously selected color
+  updatePrevColor();
+
   currentFileName = filename;
   createFile();
 }
@@ -62,13 +69,13 @@ function createFile() {
   //  const template
   const template = `
   <!-- button template -->
-  <div class="d-flex justify-content-between 
+  <div class="d-flex justify-content-between file-box
     align-items-baseline shadow p-2 bg-secondary rounded my-2 " onclick="loadFile(event)" id="${currentFileName}" style="cursor: pointer;">
     <div style="user-select: none">
     ${currentFileName}
     </div>
     <div class="d-flex">
-      <button type="button" class=" me-2 btn btn-sm btn-outline-light">
+      <button type="button" class="me-2 btn btn-sm btn-outline-light">
         <i class="fas fa-pen fa-1x"></i>
       </button>
       <button type="button" class="btn btn-sm btn-outline-light" onclick="deleteFile(this)">
@@ -76,39 +83,107 @@ function createFile() {
       </button>
     </div>
   </div>
+  <style>
+    .file-box:hover {
+      color: black;
+    }
+  </style>
   `;
 
+  const fileData = { 
+    "currentFileName": currentFileName,
+    "template": template,
+  }
+  fileTemplates.push(fileData);
+  console.log(fileTemplates);
+  console.log(parseTemplates());
   // set add
-  files.innerHTML += template;
+  console.log(files);
+  files.insertAdjacentHTML('beforeend', template);
   //clearPage();
   //save empty file
   saveChanges();
 
-
-
+  // change firstly selected box 
+  changeColor(currentFileName);
 
 }
 
-// function activateEnter() {
+// parse all file templates 
+function parseTemplates() {
+  let templates = "";
+  for (let i = 0; i < fileTemplates.length; i++)
+    templates = fileTemplates[i].template + templates;  
+  return templates;
+}
 
 
-// }
 const rename = document.getElementById('rename')
 
-rename.addEventListener("keydown", function (event) {
+rename.addEventListener("keyup", function (event) {
 
-
-  if (event.key === "Enter") {
+  if (event.keyCode === 13) {
+    event.preventDefault()
     setFileName();
-    const a = document.getElementsByClassName('modal-backdrop')[0].style.display = "none";
   }
 });
 
+
+function updatePrevColor() { 
+  // revert prev selected file-box color
+  if (currentFileName != "")  {
+    changeColor(currentFileName);
+  }
+}
 //load file content
 function loadFile(event) {
+  // user clicks same button
+  if (currentFileName == event.target.id) {
+    console.log('you have already selected it: ' + currentFileName);
+    return;
+  }
+
+
+  // update previously selected color
+  updatePrevColor();
+
   currentFileName = event.target.id;
   document.getElementById("editor").value = filesData[currentFileName];
+  // change style of selected file box
+  changeColor(currentFileName);
 }
+
+function changeColor(fileId) {
+  const fileBox = document.getElementById(fileId);
+  // check
+  console.log("is white mode on?: " + fileBox.classList.contains("bg-white"));
+  if(!fileBox.classList.contains("bg-white")) {
+    // remove old colors
+    fileBox.classList.remove("bg-dark", "text-white");
+    // add new ones
+    fileBox.classList.add("bg-white", "text-dark");
+
+    fileBox.querySelectorAll('button').forEach(function(node) {
+      // Do whatever you want with the node object.
+      node.classList.remove("btn-outline-light");
+      node.classList.add("btn-outline-dark");
+    });
+  }
+  else {
+    fileBox.classList.remove("bg-white", "text-dark");
+    fileBox.classList.add("bg-dark", "text-white");
+
+    fileBox.querySelectorAll('button').forEach(function(node) {
+      // Do whatever you want with the node object.
+      node.classList.remove("btn-outline-dark");
+      node.classList.add("btn-outline-light");
+    });
+  }
+
+}
+
+
+
 
 function saveChanges() {
   const fileContent = document.getElementById("editor").value;
@@ -123,7 +198,6 @@ function deleteFile(elem) {
   delete filesData[id];
   document.getElementById(id).remove();
   document.getElementById("editor").value = "";
-
   clearPage();
   // filesData.splice(event.target.id, 1);
   console.log(filesData);
