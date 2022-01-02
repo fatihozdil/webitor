@@ -95,9 +95,19 @@ function createFile() {
     ${currentFileName}
     </div>
     <div class="d-flex" >
-      <button type="button" class="me-2 btn btn-sm btn-outline-light" onclick="renameFile(event)">
+
+      <!-- update file name -->
+      <button type="button"
+      class="me-2 btn btn-sm btn-outline-light"
+      onclick="renameFile(event)"
+      data-bs-toggle="modal"
+      data-bs-target="#update-file-name">
         <i class="fas fa-pen fa-1x"></i>
       </button>
+
+
+
+
       <button type="button" class="btn btn-sm btn-outline-light" onclick="deleteFile(event, this)">
         <i class="fas fa-trash fa-1x"></i>
       </button>
@@ -153,6 +163,12 @@ function loadFile(id) {
   // change style of selected file box
   console.log(currentFileName);
   changeColor(currentFileName);
+}
+
+
+// steps:
+function renameFile(id) {
+  console.log("file name is changing");
 }
 
 function changeColor(fileId) {
@@ -224,7 +240,7 @@ rename.addEventListener("keyup", function (event) {
 
 
 /*
-// save changes with ctrl+s
+  // save changes with ctrl+s
 const rename = document.getElementById('rename')
 rename.addEventListener("keyup", function (event) {
 
