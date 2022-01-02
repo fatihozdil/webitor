@@ -1,12 +1,11 @@
 // store current filename
 let currentFileName = "";
+// store filename when clicked to the rename button 
+let newFileName = "";
 
-// store where
+// store files datas where
 // {"filename": "text"}
 let filesData = [];
-
-// store filebox html
-let fileTemplates = [];
 
 // fix tab issue
 document.getElementById("editor").addEventListener("keydown", function (e) {
@@ -52,7 +51,7 @@ function downloadFile() {
 }
 
 // get filename
-function setFileName() {
+function createFile() {
   const filename = document.getElementById("new-filename").value;
 
   // reset file name
@@ -73,7 +72,10 @@ function setFileName() {
   updatePrevColor();
 
   currentFileName = filename;
-  createFile();
+
+
+  // craete new file box component
+  createComponent();
 }
 
 
@@ -82,8 +84,14 @@ function renameFile(event) {
   console.log("file is renaming");
 }
 
+// set new file name 
+function setNewFileName(fileName) {
+  newFileName = fileName;
+  console.log("new file name: " + fileName);
+}
+
 // create file ui component
-function createFile() {
+function createComponent() {
   // close filename model
   document.getElementById("filename-modal").style.display = "none";
   //  const template
@@ -99,15 +107,11 @@ function createFile() {
       <!-- update file name -->
       <button type="button"
       class="me-2 btn btn-sm btn-outline-light"
-      onclick="renameFile(event)"
+      onclick="setNewFileName('${currentFileName}')"
       data-bs-toggle="modal"
       data-bs-target="#update-file-name">
         <i class="fas fa-pen fa-1x"></i>
       </button>
-
-
-
-
       <button type="button" class="btn btn-sm btn-outline-light" onclick="deleteFile(event, this)">
         <i class="fas fa-trash fa-1x"></i>
       </button>
@@ -153,7 +157,6 @@ function loadFile(id) {
     return;
   }
 
-
   // update previously selected color
   updatePrevColor();
 
@@ -166,10 +169,6 @@ function loadFile(id) {
 }
 
 
-// steps:
-function renameFile(id) {
-  console.log("file name is changing");
-}
 
 function changeColor(fileId) {
   console.log("color is changing");
@@ -200,14 +199,6 @@ function changeColor(fileId) {
 
 }
 
-
-function saveChanges() {
-  const fileContent = document.getElementById("editor").value;
-
-  // store files
-  filesData[currentFileName] = fileContent;
-}
-
 //delete file
 function deleteFile(event, elem) {
   event.stopPropagation();
@@ -220,6 +211,15 @@ function deleteFile(event, elem) {
   clearPage();
   // filesData.splice(event.target.id, 1);
 }
+
+
+function saveChanges() {
+  const fileContent = document.getElementById("editor").value;
+
+  // store files
+  filesData[currentFileName] = fileContent;
+}
+
 
 function clearPage() {
   document.getElementById("editor").value = "";

@@ -203,7 +203,7 @@
 
       <!-- file name input model -->
       <div class="modal fade " id="update-file-name" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                              aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content bg-dark">
             <div class="modal-body">
@@ -212,14 +212,21 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-10">
-                      <input type="text" class="form-control" placeholder="type file name"
-                        id="new-filename" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm">
+                      <input type="text"
+                             class="form-control"
+                             placeholder="type file name"
+                             id="update-filename" aria-label="Sizing example input"
+                                                  aria-describedby="inputGroup-sizing-sm"
+                                                  >
                     </div>
-                    <div class="col-2 d-flex justify-content-end ">
-                      <button type="button" data-bs-dismiss="modal" onclick="updateFileName()"
-                        class="btn btn-sm   rounded mx-2">create</button>
-                    </div>
+                      <div class="col-2 d-flex justify-content-end ">
+                        <button
+                          type="button" data-bs-dismiss="modal"
+                                        onclick="renameFile()"
+                                        class="btn btn-sm  btn-outline-light rounded mx-2">
+                         rename 
+                        </button>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -227,7 +234,7 @@
           </div>
         </div>
       </div>
-    <!-- model end -->
+      <!-- model end -->
 
 
       <main class="h-100 bg-dark ">
@@ -263,7 +270,7 @@
                                                                                                 aria-describedby="inputGroup-sizing-sm">
                                     </div>
                                     <div class="col-2 d-flex justify-content-end ">
-                                      <button type="button" data-bs-dismiss="modal" onclick="setFileName()"
+                                      <button type="button" data-bs-dismiss="modal" onclick="createFile()"
                                                                                     class="btn btn-sm btn-outline-light rounded mx-2">create</button>
                                     </div>
                                   </div>
