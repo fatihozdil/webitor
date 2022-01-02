@@ -67,7 +67,6 @@ function upload() {
       // fetch file content
       uploadedFileContent = fileRead.result;
 
-
       // create ui
       createFile(uploadedFileName);
       // create set content
@@ -104,8 +103,7 @@ function createFile(customName) {
 
 
   // open new file content
-  filesData[currentFileName] = ""
-  document.getElementById("editor").value = filesData[currentFileName];
+  document.getElementById("editor").value = "";
 
   // update previously selected color
   updatePrevColor();
