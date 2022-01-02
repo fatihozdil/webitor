@@ -1,6 +1,6 @@
 // store current filename
 let currentFileName = "";
-// store filename when clicked to the rename button 
+// store filename when clicked to the rename button
 let editedFileName = "";
 
 // store files datas where
@@ -50,9 +50,48 @@ function downloadFile() {
   download(currentFileName, fileContent);
 }
 
+function uploadProcess() {
+}
+// upload file from local
+function upload() {
+  let uploadedFileName = "";
+  let uploadedFileContent = "";
+  const fileUpload = document.getElementById('uploaded-file');
+  fileUpload.click();
+  fileUpload.addEventListener('change', function () {
+    const file = fileUpload.files[0];
+    // set file name
+    uploadedFileName = file.name;
+    let fileRead = new FileReader();
+    fileRead.onload = function() {
+      // fetch file content
+      uploadedFileContent = fileRead.result;
+
+
+      // create ui
+      createFile(uploadedFileName);
+      // create set content
+      filesData[uploadedFileName] = uploadedFileContent;
+      // load content to text area 
+      document.getElementById("editor").value = filesData[uploadedFileName];
+      // have access to name and content
+    }
+    fileRead.readAsText(file);
+
+  })
+}
+
+
+
 // get filename
-function createFile() {
-  const filename = document.getElementById("new-filename").value;
+function createFile(customName) {
+  let filename = "";
+  // user manually creates file
+  if (customName == undefined)
+    filename = document.getElementById("new-filename").value;
+  // create uploaded file ui 
+  else 
+    filename = customName;
 
   // reset file name
   document.getElementById("new-filename").value = "";
@@ -80,7 +119,7 @@ function createFile() {
 
 
 
-// set new file name 
+// set new file name
 function setNewFileName(event, fileName) {
   editedFileName = fileName;
   event.stopPropagation();
@@ -94,10 +133,9 @@ function renameFile() {
 
   // access elements
   const fileBox = document.getElementById(editedFileName);
-  console.log(fileBox);
-  const fileNameText = fileBox.childNodes[1]; 
-  const renameButton= fileBox.childNodes[3].childNodes[3]; 
-  
+  const fileNameText = fileBox.childNodes[1];
+  const renameButton= fileBox.childNodes[3].childNodes[3];
+
   // update ui
   // remove old infos
   fileBox.removeAttribute("onclick");
@@ -108,8 +146,17 @@ function renameFile() {
   renameButton.removeAttribute('onclick');
   renameButton.setAttribute('onclick', `setNewFileName(event, '${newFileName}')`)
 
-  //console.log(fileBox) // update data
-  
+  // update data
+  const temp = filesData[editedFileName];
+  delete filesData[editedFileName];
+  filesData[newFileName] = temp;
+
+  // set current file, if necessary
+  if (editedFileName === currentFileName)
+    currentFileName = newFileName;
+
+  console.log(temp);
+
 }
 
 // create file ui component
@@ -180,11 +227,9 @@ function loadFile(id) {
   // update previously selected color
   updatePrevColor();
 
-  console.log(currentFileName);
   currentFileName = id;
   document.getElementById("editor").value = filesData[currentFileName];
   // change style of selected file box
-  console.log(currentFileName);
   changeColor(currentFileName);
 }
 
