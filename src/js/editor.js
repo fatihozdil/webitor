@@ -55,11 +55,31 @@ function downloadFile() {
 function setFileName() {
   const filename = document.getElementById("new-filename").value;
 
+  // reset file name
+  document.getElementById("new-filename").value = "";
+
+  // prevent to create same file
+  if (filesData[filename] != undefined) {
+    alert(`file '${filename}' already exist`);
+    return;
+  }
+
+
+  // open new file content
+  filesData[currentFileName] = ""
+  document.getElementById("editor").value = filesData[currentFileName];
+
   // update previously selected color
   updatePrevColor();
 
   currentFileName = filename;
   createFile();
+}
+
+
+function renameFile(elem) {
+  alert(elem.id);
+  console.log(id);
 }
 
 // create file ui component
@@ -69,19 +89,23 @@ function createFile() {
   //  const template
   const template = `
   <!-- button template -->
+  <div>
+
   <div class="d-flex justify-content-between file-box
-    align-items-baseline shadow p-2 bg-secondary rounded my-2 " onclick="loadFile(event)" id="${currentFileName}" style="cursor: pointer;">
+    align-items-baseline shadow p-2 bg-secondary rounded my-2" onclick="loadFile(event)" id="${currentFileName}" style="cursor: pointer;">
     <div style="user-select: none">
     ${currentFileName}
     </div>
     <div class="d-flex">
-      <button type="button" class="me-2 btn btn-sm btn-outline-light">
+      <button type="button" class="me-2 btn btn-sm btn-outline-light" onclick="renameFile(this)">
         <i class="fas fa-pen fa-1x"></i>
       </button>
       <button type="button" class="btn btn-sm btn-outline-light" onclick="deleteFile(this)">
         <i class="fas fa-trash fa-1x"></i>
       </button>
     </div>
+  </div>
+
   </div>
   <style>
     .file-box:hover {
@@ -90,46 +114,25 @@ function createFile() {
   </style>
   `;
 
-  const fileData = { 
+  const fileData = {
     "currentFileName": currentFileName,
     "template": template,
   }
-  fileTemplates.push(fileData);
-  console.log(fileTemplates);
-  console.log(parseTemplates());
   // set add
-  console.log(files);
   files.insertAdjacentHTML('beforeend', template);
   //clearPage();
   //save empty file
   saveChanges();
 
-  // change firstly selected box 
+  // change firstly selected box
   changeColor(currentFileName);
 
 }
 
-// parse all file templates 
-function parseTemplates() {
-  let templates = "";
-  for (let i = 0; i < fileTemplates.length; i++)
-    templates = fileTemplates[i].template + templates;  
-  return templates;
-}
 
 
-const rename = document.getElementById('rename')
 
-rename.addEventListener("keyup", function (event) {
-
-  if (event.keyCode === 13) {
-    event.preventDefault()
-    setFileName();
-  }
-});
-
-
-function updatePrevColor() { 
+function updatePrevColor() {
   // revert prev selected file-box color
   if (currentFileName != "")  {
     changeColor(currentFileName);
@@ -139,7 +142,6 @@ function updatePrevColor() {
 function loadFile(event) {
   // user clicks same button
   if (currentFileName == event.target.id) {
-    console.log('you have already selected it: ' + currentFileName);
     return;
   }
 
@@ -156,7 +158,6 @@ function loadFile(event) {
 function changeColor(fileId) {
   const fileBox = document.getElementById(fileId);
   // check
-  console.log("is white mode on?: " + fileBox.classList.contains("bg-white"));
   if(!fileBox.classList.contains("bg-white")) {
     // remove old colors
     fileBox.classList.remove("bg-dark", "text-white");
@@ -183,8 +184,6 @@ function changeColor(fileId) {
 }
 
 
-
-
 function saveChanges() {
   const fileContent = document.getElementById("editor").value;
 
@@ -200,7 +199,6 @@ function deleteFile(elem) {
   document.getElementById("editor").value = "";
   clearPage();
   // filesData.splice(event.target.id, 1);
-  console.log(filesData);
 }
 
 function clearPage() {
@@ -208,13 +206,28 @@ function clearPage() {
   currentFileName = "";
 }
 
-//
+/*
+  // add event listener to enter button
+const rename = document.getElementById('rename')
+rename.addEventListener("keyup", function (event) {
+
+  if (event.keyCode === 13) {
+    event.preventDefault()
+    setFileName();
+  }
+});
+*/
 
 
+/*
+// save changes with ctrl+s
+const rename = document.getElementById('rename')
+rename.addEventListener("keyup", function (event) {
 
-// function pressedEnter(event) {
-//   console.log("pressed");
-//   if (event.key === "Enter") {
-//     alert("enter was pressed!");
-//   }
-// }
+  if (event.keyCode === 17 && event.keyCode === 83) {
+    event.preventDefault()
+    saveChanges();
+    console.log("all changes are saved");
+  }
+});
+*/
