@@ -1,7 +1,7 @@
 // store current filename
 let currentFileName = "";
 // store filename when clicked to the rename button 
-let newFileName = "";
+let editedFileName = "";
 
 // store files datas where
 // {"filename": "text"}
@@ -79,15 +79,37 @@ function createFile() {
 }
 
 
-function renameFile(event) {
-  event.stopPropagation();
-  console.log("file is renaming");
-}
 
 // set new file name 
-function setNewFileName(fileName) {
-  newFileName = fileName;
-  console.log("new file name: " + fileName);
+function setNewFileName(event, fileName) {
+  editedFileName = fileName;
+  event.stopPropagation();
+}
+
+// rename files content with using
+// editing file name info
+function renameFile() {
+  // access new file name
+  const newFileName = document.getElementById("update-filename").value;
+
+  // access elements
+  const fileBox = document.getElementById(editedFileName);
+  console.log(fileBox);
+  const fileNameText = fileBox.childNodes[1]; 
+  const renameButton= fileBox.childNodes[3].childNodes[3]; 
+  
+  // update ui
+  // remove old infos
+  fileBox.removeAttribute("onclick");
+  fileBox.setAttribute('onclick', `loadFile('${newFileName}')`)
+  fileBox.removeAttribute("id");
+  fileBox.setAttribute('id', `${newFileName}`)
+  fileNameText.innerHTML = newFileName;
+  renameButton.removeAttribute('onclick');
+  renameButton.setAttribute('onclick', `setNewFileName(event, '${newFileName}')`)
+
+  //console.log(fileBox) // update data
+  
 }
 
 // create file ui component
@@ -99,15 +121,14 @@ function createComponent() {
   <!-- button template -->
   <div class="d-flex justify-content-between file-box
     align-items-baseline shadow p-2 bg-secondary rounded my-2" onclick="loadFile('${currentFileName}')" id="${currentFileName}" style="cursor: pointer;">
-    <div style="user-select: none">
+    <div style="user-select: none" >
     ${currentFileName}
     </div>
     <div class="d-flex" >
-
       <!-- update file name -->
       <button type="button"
       class="me-2 btn btn-sm btn-outline-light"
-      onclick="setNewFileName('${currentFileName}')"
+      onclick="setNewFileName(event, '${currentFileName}')"
       data-bs-toggle="modal"
       data-bs-target="#update-file-name">
         <i class="fas fa-pen fa-1x"></i>
@@ -151,7 +172,6 @@ function updatePrevColor() {
 
 //load file content
 function loadFile(id) {
-  console.log(id);
   // user clicks same button
   if (currentFileName == id) {
     return;
@@ -171,7 +191,6 @@ function loadFile(id) {
 
 
 function changeColor(fileId) {
-  console.log("color is changing");
   const fileBox = document.getElementById(fileId);
   // check
   if(!fileBox.classList.contains("bg-white")) {
