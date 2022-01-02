@@ -29,7 +29,7 @@
       <!-- navbar -->
       <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid px-3">
-          <div class="col d-flex justify-content-between">
+          <div class="col d-flex justify-content-between align-items-center">
             <!-- logo start -->
             <a href="#" class="navbar-brand d-flex align-items-center ">
               <img src="assets/webitor.png" class="img-fluid w-75" alt="logo" />
@@ -39,8 +39,10 @@
 
 
             <!-- modal end -->
+
+            <a class="link-light" id="login-btn" style="height: fit-content" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Login</a>
             <!-- menu -->
-            <div class="dropdown dropstart text-white" style="width: fit-content" >
+            <div class="dropdown d-none dropstart text-white" id="user-menu" style="width: fit-content" >
               <button class="btn d-flex align-items-center" type="button" id="dropdownMenuButton1"
                                                                           data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="far fa-user-circle fa-3x icon-white"></i>
@@ -48,7 +50,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="#">Chage password</a></li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a onclick="logout()" class="dropdown-item" href="#">
                     <i class="far fa-sign-out fa-1x"></i>
                     Logout
                   </a>
@@ -62,147 +64,141 @@
       </nav>
 
 
-
-      <div class="row p-5 d-none">
-        <!--modal start  -->
-        <div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-                                                                            tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-white icon-white">
-              <!-- <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> -->
-                <div class="modal-content bg-dark">
-                  <div class="p-4">
-                    <div class="col d-flex justify-content-center">
-                      <div class="row ">
-                        <div class="col">
-                          <div class="row">
-                            <div class="col d-flex justify-content-center">
-                              <a href="#" class="m-0 navbar-brand d-flex justify-content-center">
-                                <img src="assets/webitor.png" class="img-fluid " alt="logo" />
-                              </a>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col d-flex justify-content-center">
-                              <h2 class="modal-title text-light" id="staticBackdropLabel"> Login</h2>
-                            </div>
+      <!--modal start  -->
+      <div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+                                                                          tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark text-white icon-white">
+            <!-- <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div> -->
+              <div class="modal-content bg-dark">
+                <div class="p-4">
+                  <div class="col d-flex justify-content-center">
+                    <div class="row ">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col d-flex justify-content-center">
+                            <a href="#" class="m-0 navbar-brand d-flex justify-content-center">
+                              <img src="assets/webitor.png" class="img-fluid " alt="logo" />
+                            </a>
                           </div>
                         </div>
-
-                      </div>
-
-                    </div>
-
-
-                  </div>
-                  <div class="p-4">
-
-                    <div class="form-floating mb-3">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Email" aria-label="Email"
-                                                                                    aria-describedby="basic-addon1">
-                      </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></i></span>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Password"
-                                                                                           aria-describedby="basic-addon1">
-                      </div>
-                    </div>
-                    <div class="h6">
-                      <a class="d-flex justify-content-end" href="#">Forgot Password?</a>
-                    </div>
-                    <button type="button" class="btn btn-primary m-3">LOG IN</button>
-                    <div class="d-flex justify-content-center text-white">
-                      Don't have an acoount yet?
-                    </div>
-                    <a class="link-primary" href="#" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">SIGN
-                      UP</a>
-                  </div>
-                </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-                                                                            tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-
-
-
-            <div class="modal-content bg-dark">
-              <div class="p-4">
-                <div class="col d-flex justify-content-center">
-                  <div class="row ">
-                    <div class="col">
-                      <div class="row">
-                        <div class="col d-flex justify-content-center">
-                          <a href="#" class="m-0 navbar-brand d-flex justify-content-center">
-                            <img src="assets/webitor.png" class="img-fluid " alt="logo" />
-                          </a>
+                        <div class="row">
+                          <div class="col d-flex justify-content-center">
+                            <h2 class="modal-title text-light" id="staticBackdropLabel">Login</h2>
+                          </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col d-flex justify-content-center">
-                          <h2 class="modal-title text-light" id="staticBackdropLabel">
-                            Sign Up
-                          </h2>
-                        </div>
-                      </div>
+
                     </div>
 
                   </div>
 
-                </div>
-              </div>
 
-              <div class="p-4">
-                <div class="form-floating mb-3">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control me-2" placeholder="Name" aria-label="Name"
-                                                                                    aria-describedby="basic-addon1">
-                    <input type="text" class="form-control" placeholder="Surname" aria-label="Surname"
+                </div>
+                <div class="p-4">
+
+                  <div class="form-floating mb-3">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                      <input type="text" class="form-control" placeholder="Email" aria-label="Email"
                                                                                   aria-describedby="basic-addon1">
+                    </div>
                   </div>
-                </div>
-
-                <div class="form-floating mb-3">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Email" aria-label="Email"
-                                                                                aria-describedby="basic-addon1">
+                  <div class="form-floating mb-3">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></i></span>
+                      <input type="password" class="form-control" placeholder="Password" aria-label="Password"
+                                                                                         aria-describedby="basic-addon1">
+                    </div>
                   </div>
-                </div>
-                <div class="form-floating mb-3">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></i></span>
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password"
-                                                                                       aria-describedby="basic-addon1">
+                  <div class="h6">
+                    <a class="d-flex justify-content-end" href="#">Forgot Password?</a>
                   </div>
-                </div>
-                <div class="form-floating mb-3">
-                  <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Confirm password"
-                                                                aria-label="Confirm password" aria-describedby="basic-addon1">
+                  <button type="button" onclick="login()" data-bs-dismiss="modal" class="btn btn-primary m-3">LOG IN</button>
+                  <div class="d-flex justify-content-center text-white">
+                    Don't have an acoount yet?
                   </div>
-                </div>
-                <button type="button" class="btn btn-primary m-3">SIGN UP</button>
-                <div class="div">
-                  <a class="" data-bs-toggle="modal" href="#exampleModalToggle" role="button">LOG IN</a>
+                  <a class="link-primary" href="#" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">SIGN
+                    UP</a>
                 </div>
               </div>
-            </div>
 
           </div>
         </div>
-        <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Login</a>
+      </div>
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+                                                                          tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
 
 
+
+          <div class="modal-content bg-dark">
+            <div class="p-4">
+              <div class="col d-flex justify-content-center">
+                <div class="row ">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col d-flex justify-content-center">
+                        <a href="#" class="m-0 navbar-brand d-flex justify-content-center">
+                          <img src="assets/webitor.png" class="img-fluid " alt="logo" />
+                        </a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col d-flex justify-content-center">
+                        <h2 class="modal-title text-light" id="staticBackdropLabel">
+                          Sign Up
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="p-4">
+              <div class="form-floating mb-3">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control me-2" placeholder="Name" aria-label="Name"
+                                                                                  aria-describedby="basic-addon1">
+                  <input type="text" class="form-control" placeholder="Surname" aria-label="Surname"
+                                                                                aria-describedby="basic-addon1">
+                </div>
+              </div>
+
+              <div class="form-floating mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                  <input type="text" class="form-control" placeholder="Email" aria-label="Email"
+                                                                              aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></i></span>
+                  <input type="password" class="form-control" placeholder="Password" aria-label="Password"
+                                                                                     aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" placeholder="Confirm password"
+                                                              aria-label="Confirm password" aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary m-3">SIGN UP</button>
+              <div class="div">
+                <a class="" data-bs-toggle="modal" href="#exampleModalToggle" role="button">LOG IN</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
 
@@ -314,8 +310,14 @@
               <!-- text editor nav -->
               <div class="row" style="height: 54.23px">
                 <div class="col d-flex align-items-center justify-content-end">
-                  <div class="rows">
-                    <button type="button" onclick="saveChanges()" class="btn btn-sm btn-outline-light rounded mx-2">
+                  <div class="rows d-flex">
+                    <span class="form-switch d-flex align-items-center">
+                      <input
+                        data-bs-toggle="tooltip" data-bs-placement="left" title="switch mode"
+                                                                          class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    </span>
+                    <button type="button"
+                            onclick="saveChanges()" class="btn btn-sm btn-outline-light rounded mx-2">
                       save changes
                     </button>
                     <button onclick="downloadFile()" type="button" class="btn btn-sm btn-outline-light">
@@ -341,6 +343,7 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <script src="src/js/editor.js"></script>
+    <script src="src/js/user.js"></script>
   </body>
 
 </html>
