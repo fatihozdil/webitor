@@ -210,9 +210,9 @@
             <div class="modal-body">
 
               <div class="input-group input-group-sm">
-                <div class="container">
+                <div class="container p-0">
                   <div class="row">
-                    <div class="col-10">
+                    <div class="col-8 p-0">
                       <input type="text"
                              class="form-control"
                              placeholder="type file name"
@@ -220,11 +220,18 @@
                                                   aria-describedby="inputGroup-sizing-sm"
                                                   >
                     </div>
-                      <div class="col-2 d-flex justify-content-end ">
+                      <div class="col-2 p-0 d-flex justify-content-end ">
                         <button
                           type="button" data-bs-dismiss="modal"
                                         onclick="renameFile()"
                                         class="btn btn-sm  btn-outline-light rounded mx-2">
+                          rename
+                        </button>
+                      </div>
+                      <div class="col-2 p-0 d-flex justify-content-end ">
+                        <button
+                          type="button" data-bs-dismiss="modal"
+                                        class="btn btn-sm  btn-outline-secondary rounded mx-2">
                           rename
                         </button>
                       </div>
