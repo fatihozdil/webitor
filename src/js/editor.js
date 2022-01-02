@@ -77,9 +77,9 @@ function setFileName() {
 }
 
 
-function renameFile(elem) {
-  alert(elem.id);
-  console.log(id);
+function renameFile(event) {
+  event.stopPropagation();
+  console.log("file is renaming");
 }
 
 // create file ui component
@@ -89,23 +89,19 @@ function createFile() {
   //  const template
   const template = `
   <!-- button template -->
-  <div>
-
   <div class="d-flex justify-content-between file-box
-    align-items-baseline shadow p-2 bg-secondary rounded my-2" onclick="loadFile(event)" id="${currentFileName}" style="cursor: pointer;">
+    align-items-baseline shadow p-2 bg-secondary rounded my-2" onclick="loadFile('${currentFileName}')" id="${currentFileName}" style="cursor: pointer;">
     <div style="user-select: none">
     ${currentFileName}
     </div>
-    <div class="d-flex">
-      <button type="button" class="me-2 btn btn-sm btn-outline-light" onclick="renameFile(this)">
+    <div class="d-flex" >
+      <button type="button" class="me-2 btn btn-sm btn-outline-light" onclick="renameFile(event)">
         <i class="fas fa-pen fa-1x"></i>
       </button>
-      <button type="button" class="btn btn-sm btn-outline-light" onclick="deleteFile(this)">
+      <button type="button" class="btn btn-sm btn-outline-light" onclick="deleteFile(event, this)">
         <i class="fas fa-trash fa-1x"></i>
       </button>
     </div>
-  </div>
-
   </div>
   <style>
     .file-box:hover {
@@ -138,10 +134,12 @@ function updatePrevColor() {
     changeColor(currentFileName);
   }
 }
+
 //load file content
-function loadFile(event) {
+function loadFile(id) {
+  console.log(id);
   // user clicks same button
-  if (currentFileName == event.target.id) {
+  if (currentFileName == id) {
     return;
   }
 
@@ -149,13 +147,16 @@ function loadFile(event) {
   // update previously selected color
   updatePrevColor();
 
-  currentFileName = event.target.id;
+  console.log(currentFileName);
+  currentFileName = id;
   document.getElementById("editor").value = filesData[currentFileName];
   // change style of selected file box
+  console.log(currentFileName);
   changeColor(currentFileName);
 }
 
 function changeColor(fileId) {
+  console.log("color is changing");
   const fileBox = document.getElementById(fileId);
   // check
   if(!fileBox.classList.contains("bg-white")) {
@@ -192,8 +193,11 @@ function saveChanges() {
 }
 
 //delete file
-function deleteFile(elem) {
+function deleteFile(event, elem) {
+  event.stopPropagation();
+
   const id = elem.parentNode.parentNode.id;
+  console.log(id);
   delete filesData[id];
   document.getElementById(id).remove();
   document.getElementById("editor").value = "";
