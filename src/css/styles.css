@@ -5,9 +5,20 @@ body, #editor {
 
 /* font awaesome font color */
 .icon-white {
-    color: white;
+    color: #f8f8f2;
 }
 
-#files {
+.icon-black {
+    color: #282A36;
 }
 
+/* https://en.wikipedia.org/wiki/Dracula_(color_scheme) */
+.theme-white {
+    background-color: #f8f8f2 !important;
+    color: #282A36 !important;
+}
+
+.theme-black{
+    background-color: #282A36 !important;
+    color: #f8f8f2 !important;
+}
