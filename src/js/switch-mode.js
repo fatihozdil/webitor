@@ -1,3 +1,4 @@
+// change color theme
 function switchMode() {
   console.log("mode is changing...");
   document.querySelectorAll('*').forEach(function(node) {
