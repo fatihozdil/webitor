@@ -305,7 +305,7 @@
                   <div class="w-100  mx-0 my-2 py-1 d-flex justify-content-center  align-items-baseline mb-3">
                     <div class="p-0">
                       <!-- create file button -->
-                      <button type="button" class="btn btn-sm theme-white" data-bs-toggle="modal"
+                      <button type="button" title="create file" class="btn btn-sm theme-white" data-bs-toggle="modal"
                                                                            data-bs-target="#filename-modal">
                         <i class="far fa-file-alt fa-2x"></i>
                       </button>
@@ -351,8 +351,8 @@
                       </div>
                     </div>
                     <div class=" p-0">
-                      <input class="d-none" type="file" id="uploaded-file" name="filename">
-                      <button type="button" onclick="upload()" class="btn btn-sm theme-white rounded">
+                      <input class="d-none" type="file"  id="uploaded-file" name="filename">
+                      <button type="button" onclick="upload()" title="upload file" class="btn btn-sm theme-white rounded">
                         <i class="far fa-file-upload  fa-2x"></i>
                       </button>
                     </div>
@@ -378,7 +378,7 @@
                     <button type="button" onclick="saveChanges()" class="btn btn-sm theme-black rounded mx-3">
                       save changes
                     </button>
-                    <button onclick="downloadFile()" type="button" class="btn btn-sm theme-white">
+                    <button onclick="downloadFile()" title="download file" type="button" class="btn btn-sm theme-white">
                       <i class="fas fa-file-download fa-2x"></i>
                     </button>
                   </div>
