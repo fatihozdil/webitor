@@ -86,11 +86,13 @@ function upload() {
 function createFile(customName) {
   let filename = "";
   // user manually creates file
-  if (customName == undefined)
+  if (customName == undefined) {
     filename = document.getElementById("new-filename").value;
+  }
   // create uploaded file ui 
-  else 
+  else { 
     filename = customName;
+  }
 
   // reset file name
   document.getElementById("new-filename").value = "";
