@@ -3,6 +3,11 @@ body, #editor {
     font-size: 14;
 }
 
+#editor:focus {
+    outline: none ;
+    filter: brightness(95%);
+}
+
 /* font awaesome font color */
 .icon-white {
     color: #f8f8f2;
