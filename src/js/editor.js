@@ -76,6 +76,7 @@ function upload() {
       document.getElementById("editor").value = filesData[uploadedFileName];
       // have access to name and content
       // place number of line
+      line = 1;
       updateLines();
     }
     fileRead.readAsText(file);
@@ -110,8 +111,13 @@ function createFile(customName) {
   // open new file content
   document.getElementById("editor").value = "";
 
+  // update lines
+  console.log("here");
+  updateLines();
+
   // update previously selected color
   updatePrevColor();
+
 
   currentFileName = filename;
 
