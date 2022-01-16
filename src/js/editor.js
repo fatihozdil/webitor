@@ -133,6 +133,7 @@ function setNewFileName(event, fileName) {
 function renameFile() {
   // access new file name
   const newFileName = document.getElementById("update-filename").value;
+  document.getElementById("update-filename").value = ""; // reset old value
 
   // access elements
   const fileBox = document.getElementById(editedFileName);
@@ -169,7 +170,7 @@ function createComponent() {
   //  const template
   const template = `
   <!-- button template -->
-  <div class="d-flex justify-content-between file-box theme-black align-items-baseline shadow p-2 rounded my-2" 
+  <div class="d-flex justify-content-between file-box theme-white align-items-baseline shadow p-2 rounded my-2" 
        onclick="loadFile('${currentFileName}')" 
        id="${currentFileName}" 
        style="cursor: pointer;">
@@ -183,10 +184,10 @@ function createComponent() {
       onclick="setNewFileName(event, '${currentFileName}')"
       data-bs-toggle="modal"
       data-bs-target="#update-file-name" title="rename file">
-        <i class="fas fa-pen fa-1x icon-white"></i>
+        <i class="fas fa-pen fa-1x icon-black"></i>
       </button>
       <button type="button" class="btn btn-sm" onclick="deleteFile(event, this)" title="delete file">
-        <i class="fas fa-trash fa-1x icon-white"></i>
+        <i class="fas fa-trash fa-1x icon-black"></i>
       </button>
     </div>
   </div>
