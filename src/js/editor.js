@@ -7,6 +7,9 @@ let editedFileName = "";
 // {"filename": "text"}
 let filesData = [];
 
+// number of lines in editor
+let lines = 1;
+
 // fix tab issue
 document.getElementById("editor").addEventListener("keydown", function (e) {
   if (e.key == "Tab") {
@@ -50,8 +53,6 @@ function downloadFile() {
   download(currentFileName, fileContent);
 }
 
-function uploadProcess() {
-}
 // upload file from local
 function upload() {
   let uploadedFileName = "";
@@ -71,9 +72,11 @@ function upload() {
       createFile(uploadedFileName);
       // create set content
       filesData[uploadedFileName] = uploadedFileContent;
-      // load content to text area 
+      // load content to text area
       document.getElementById("editor").value = filesData[uploadedFileName];
       // have access to name and content
+      // place number of line
+      putLines(calcLines());
     }
     fileRead.readAsText(file);
 
@@ -89,8 +92,8 @@ function createFile(customName) {
   if (customName == undefined) {
     filename = document.getElementById("new-filename").value;
   }
-  // create uploaded file ui 
-  else { 
+  // create uploaded file ui
+  else {
     filename = customName;
   }
 
@@ -288,6 +291,49 @@ function saveChanges() {
 function clearPage() {
   document.getElementById("editor").value = "";
   currentFileName = "";
+  // reset line counter
+  document.getElementById("enumerate") = "";
+}
+
+/* enumerate lines in editor */
+function updateLines() {
+  // count number of lines
+  const numOfLine = calcLines()
+  const lineDiff = numOfLine - lines;
+  console.log("line state: " + lines)
+  console.log("num of lines: " + numOfLine)
+  if (lineDiff > 0) {
+    console.log("add new line")
+    putLines(Math.abs(lineDiff));
+  }
+  else if (lineDiff < 0 && lines != 1) {
+    console.log("remove line")
+    // remeove last count
+    removeLines(Math.abs(lineDiff));
+  }
+}
+
+// return number of lines
+function calcLines() {
+  // count number of lines
+  const fileContent = document.getElementById("editor").value;
+  return fileContent.split(/\r\n|\r|\n/).length // add 1 to pass new line
+}
+
+// fill with line counts 2 to n inclusive
+function putLines(n) {
+  for (let i = 0; i < n; i++) {
+    const newLineCount = `<p class="mb-0">${lines + 1}</p>`
+    document.getElementById("enumerate").insertAdjacentHTML('beforeend', newLineCount)
+    lines++;
+  }
+}
+
+function removeLines(n) {
+  for (let i = 0; i < n; i++) {
+    document.getElementById("enumerate").removeChild(document.getElementById("enumerate").lastChild);
+    lines--;
+  }
 }
 
 /*
