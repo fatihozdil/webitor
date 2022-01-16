@@ -294,7 +294,8 @@ function clearPage() {
   document.getElementById("editor").value = "";
   currentFileName = "";
   // reset line counter
-  document.getElementById("enumerate") = "";
+  removeLines(calcLines())
+  updateLines()
 }
 
 /* enumerate lines in editor */
