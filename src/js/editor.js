@@ -76,7 +76,7 @@ function upload() {
       document.getElementById("editor").value = filesData[uploadedFileName];
       // have access to name and content
       // place number of line
-      putLines(calcLines());
+      updateLines();
     }
     fileRead.readAsText(file);
 
