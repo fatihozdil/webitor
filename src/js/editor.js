@@ -169,30 +169,27 @@ function createComponent() {
   //  const template
   const template = `
   <!-- button template -->
-  <div class="d-flex justify-content-between file-box
-    align-items-baseline shadow p-2 bg-secondary rounded my-2" onclick="loadFile('${currentFileName}')" id="${currentFileName}" style="cursor: pointer;">
+  <div class="d-flex justify-content-between file-box theme-black align-items-baseline shadow p-2 rounded my-2" 
+       onclick="loadFile('${currentFileName}')" 
+       id="${currentFileName}" 
+       style="cursor: pointer;">
     <div style="user-select: none" >
     ${currentFileName}
     </div>
     <div class="d-flex" >
       <!-- update file name -->
       <button type="button"
-      class="me-2 btn btn-sm btn-outline-light"
+      class="me-2 btn btn-sm"
       onclick="setNewFileName(event, '${currentFileName}')"
       data-bs-toggle="modal"
-      data-bs-target="#update-file-name">
-        <i class="fas fa-pen fa-1x"></i>
+      data-bs-target="#update-file-name" title="rename file">
+        <i class="fas fa-pen fa-1x icon-white"></i>
       </button>
-      <button type="button" class="btn btn-sm btn-outline-light" onclick="deleteFile(event, this)">
-        <i class="fas fa-trash fa-1x"></i>
+      <button type="button" class="btn btn-sm" onclick="deleteFile(event, this)" title="delete file">
+        <i class="fas fa-trash fa-1x icon-white"></i>
       </button>
     </div>
   </div>
-  <style>
-    .file-box:hover {
-      color: black;
-    }
-  </style>
   `;
 
   const fileData = {
@@ -238,29 +235,33 @@ function loadFile(id) {
 
 
 
+// switch the color of fil box
 function changeColor(fileId) {
   const fileBox = document.getElementById(fileId);
-  // check
-  if(!fileBox.classList.contains("bg-white")) {
+  // make theme white
+  if(!fileBox.classList.contains("theme-white")) {
     // remove old colors
-    fileBox.classList.remove("bg-dark", "text-white");
+    fileBox.classList.remove("theme-black");
     // add new ones
-    fileBox.classList.add("bg-white", "text-dark");
+    fileBox.classList.add("theme-white");
 
-    fileBox.querySelectorAll('button').forEach(function(node) {
+    fileBox.querySelectorAll('i').forEach(function(node) {
       // Do whatever you want with the node object.
-      node.classList.remove("btn-outline-light");
-      node.classList.add("btn-outline-dark");
+      node.classList.remove("icon-white");
+      node.classList.add("icon-black");
     });
   }
+  // make theme dark
   else {
-    fileBox.classList.remove("bg-white", "text-dark");
-    fileBox.classList.add("bg-dark", "text-white");
+    // remove old colors
+    fileBox.classList.remove("theme-white");
+    // add new ones
+    fileBox.classList.add("theme-black");
 
-    fileBox.querySelectorAll('button').forEach(function(node) {
+    fileBox.querySelectorAll('i').forEach(function(node) {
       // Do whatever you want with the node object.
-      node.classList.remove("btn-outline-dark");
-      node.classList.add("btn-outline-light");
+      node.classList.remove("icon-black");
+      node.classList.add("icon-white");
     });
   }
 
