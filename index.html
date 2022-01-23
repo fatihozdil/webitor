@@ -369,16 +369,16 @@
               <div class="row card theme-white" style="height: 54.23px">
                 <div class="col d-flex align-items-center justify-content-end">
                   <div class="rows d-flex">
-                    <span class="form-switch d-flex align-items-center">
+                    <span class="form-switch d-flex align-items-center mx-2">
 
                       <label class="form-check-label me-5" for="flexSwitchCheckDefault">Dark Mode</label>
                       <input data-bs-toggle="tooltip" data-bs-placement="left" onchange="switchMode()" title="switch mode"
                                                                                                        class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     </span>
-                    <button type="button" onclick="saveChanges()" class="btn btn-sm theme-black rounded mx-3">
+                    <!-- button type="button" onclick="saveChanges()" class="btn btn-sm theme-black rounded mx-3">
                       save changes
-                    </button>
-                    <button onclick="downloadFile()" title="download file" type="button" class="btn btn-sm theme-white">
+                    </button -->
+                    <button onclick="downloadFile()" title="download file" type="button" class="btn btn-sm theme-white ">
                       <i class="fas fa-file-download fa-2x"></i>
                     </button>
                   </div>
@@ -386,15 +386,14 @@
               </div>
 
               <div class="row overflow-auto" style="height: calc(100% - 54.23px);">
-                <div class="col d-flex p-0">
+                <div class="col d-flex">
                   <div class="mt-2 px-2" 
-                       id="enumerate"
-                       style="filter: brightness(95%);">
+                       id="enumerate">
                     <p class="mb-0">1</p>
                   </div>
                   <textarea autofocus 
                     spellcheck="false" 
-                    class="p-2 pb-5 w-100 h-100 overflow-hidden theme-white border-0"  
+                    class="p-2 pb-5 w-100 h-100 theme-white border-0"  
                     style="resize: none;" 
                     onKeyPress="updateLines()"
                     onKeyDown="updateLines()"

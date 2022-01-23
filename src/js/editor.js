@@ -306,6 +306,10 @@ function clearPage() {
 
 /* enumerate lines in editor */
 function updateLines() {
+  // auto save edited text
+  if (currentFileName != "")
+    saveChanges();
+
   // count number of lines
   const numOfLine = calcLines()
   const lineDiff = numOfLine - lines;
