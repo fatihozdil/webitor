@@ -7,11 +7,11 @@ let editedFileName = "";
 // {"filename": "text"}
 let filesData = [];
 
-// number of lines in editor
+// number of lines in text-area
 let lines = 1;
 
 // fix tab issue
-document.getElementById("editor").addEventListener("keydown", function (e) {
+document.getElementById("text-area").addEventListener("keydown", function (e) {
   if (e.key == "Tab") {
     e.preventDefault();
     var start = this.selectionStart;
@@ -49,7 +49,7 @@ function downloadFile() {
     alert("please create file");
     return;
   }
-  const fileContent = document.getElementById("editor").value;
+  const fileContent = document.getElementById("text-area").value;
   download(currentFileName, fileContent);
 }
 
@@ -73,7 +73,7 @@ function upload() {
       // create set content
       filesData[uploadedFileName] = uploadedFileContent;
       // load content to text area
-      document.getElementById("editor").value = filesData[uploadedFileName];
+      document.getElementById("text-area").value = filesData[uploadedFileName];
       // have access to name and content
       // place number of line
       line = 1;
@@ -109,7 +109,7 @@ function createFile(customName) {
 
 
   // open new file content
-  document.getElementById("editor").value = "";
+  document.getElementById("text-area").value = "";
 
   // update lines
   console.log("here");
@@ -235,7 +235,7 @@ function loadFile(id) {
   updatePrevColor();
 
   currentFileName = id;
-  document.getElementById("editor").value = filesData[currentFileName];
+  document.getElementById("text-area").value = filesData[currentFileName];
   // change style of selected file box
   changeColor(currentFileName);
 }
@@ -282,14 +282,14 @@ function deleteFile(event, elem) {
   console.log(id);
   delete filesData[id];
   document.getElementById(id).remove();
-  document.getElementById("editor").value = "";
+  document.getElementById("text-area").value = "";
   clearPage();
   // filesData.splice(event.target.id, 1);
 }
 
 
 function saveChanges() {
-  const fileContent = document.getElementById("editor").value;
+  const fileContent = document.getElementById("text-area").value;
 
   // store files
   filesData[currentFileName] = fileContent;
@@ -297,15 +297,15 @@ function saveChanges() {
 
 
 function clearPage() {
-  document.getElementById("editor").value = "";
+  document.getElementById("text-area").value = "";
   currentFileName = "";
   // reset line counter
   removeLines(calcLines())
   updateLines()
 }
 
-/* enumerate lines in editor */
-function updateLines() {
+/* enumerate lines in text-area */
+function updateLines(event) {
   // auto save edited text
   if (currentFileName != "")
     saveChanges();
@@ -318,6 +318,9 @@ function updateLines() {
   if (lineDiff > 0) {
     console.log("add new line")
     putLines(Math.abs(lineDiff));
+    // handle the overflowed text 
+    //scrollToBottom("editor");
+    scrollToTop("text-area");
   }
   else if (lineDiff < 0 && lines != 1) {
     console.log("remove line")
@@ -329,7 +332,7 @@ function updateLines() {
 // return number of lines
 function calcLines() {
   // count number of lines
-  const fileContent = document.getElementById("editor").value;
+  const fileContent = document.getElementById("text-area").value;
   return fileContent.split(/\r\n|\r|\n/).length // add 1 to pass new line
 }
 
@@ -374,3 +377,17 @@ rename.addEventListener("keyup", function (event) {
   }
 });
 */
+
+function scrollToBottom (id) {
+  var div = document.getElementById(id);
+  console.log(div.scroolTop);
+  div.scrollTop = div.scrollHeight - div.clientHeight;
+}
+
+
+function scrollToTop(id) {
+  var div = document.getElementById(id);
+  console.log(div.scroolTop);
+  div.scrollTop = 0; 
+  console.log(div.scroolTop);
+}
