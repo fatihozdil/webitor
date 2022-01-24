@@ -1,7 +1,24 @@
+// keep track mode state
+let isDarkModeOn = false;
+
 // change color theme
 function switchMode() {
-  console.log("mode is changing...");
+  // switch mode state 
+  isDarkModeOn = !isDarkModeOn;
   document.querySelectorAll('*').forEach(function(node) {
+    nodeThemeSwitcher(node)
+  });
+  // chage logos
+  document.querySelectorAll(".logo").forEach(function(logos) {
+    if (logos.src.includes("black"))
+      logos.src = "assets/logo-white.png";
+    else
+      logos.src = "assets/logo-black.png";
+  });
+}
+
+// switch theme of specific node
+function nodeThemeSwitcher(node) { 
     // change background
     if (node.classList.contains('theme-white')) {
       node.classList.remove('theme-white');
@@ -20,12 +37,11 @@ function switchMode() {
       node.classList.remove('icon-black');
       node.classList.add('icon-white');
     }
-  });
-  // chage logos
-  document.querySelectorAll(".logo").forEach(function(logos) {
-    if (logos.src.includes("black"))
-      logos.src = "assets/logo-white.png";
-    else
-      logos.src = "assets/logo-black.png";
-  });
+}
+
+// switch theme of specific element
+function elementThemeSwitcher(id) { 
+    console.log("switching color of id: " + id);
+    let node = document.getElementById(id);
+    nodeThemeSwitcher(node)
 }

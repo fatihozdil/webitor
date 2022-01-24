@@ -201,12 +201,19 @@ function createComponent() {
   </div>
   `;
 
+
   const fileData = {
     "currentFileName": currentFileName,
     "template": template,
   }
   // set add
   files.insertAdjacentHTML('beforeend', template);
+
+  // if dark mode on 
+  // create white file boxes
+  if (isDarkModeOn)
+    elementThemeSwitcher(`${currentFileName}`);
+
   //clearPage();
   //save empty file
   saveChanges();
