@@ -6,7 +6,7 @@ body, #editor {
 #enumerate {
 }
 
-#editor:focus {
+#text-area:focus {
     outline: none ;
     filter: brightness(95%);
 }
