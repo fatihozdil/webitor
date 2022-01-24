@@ -55,37 +55,37 @@ function downloadFile() {
   download(currentFileName, fileContent);
 }
 
+// create upload listener 
+const fileUpload = document.getElementById('uploaded-file');
+fileUpload.addEventListener('change', function () {
+  const file = fileUpload.files[0];
+  // set file name
+  uploadedFileName = file.name;
+  let fileRead = new FileReader();
+  fileRead.onload = function() {
+    // fetch file content
+    uploadedFileContent = fileRead.result;
+    // create ui
+    createFile(uploadedFileName);
+    // create set content
+    filesData[uploadedFileName] = uploadedFileContent;
+    // load content to text area
+    document.getElementById("text-area").value = filesData[uploadedFileName];
+    // have access to name and content
+    // place number of line
+    line = 1;
+    updateLines();
+  }
+  fileRead.readAsText(file);
+})
+
 // upload file from local
 function upload() {
   let uploadedFileName = "";
   let uploadedFileContent = "";
-  const fileUpload = document.getElementById('uploaded-file');
+  // call upload listener
   fileUpload.click();
-  fileUpload.addEventListener('change', function () {
-    const file = fileUpload.files[0];
-    // set file name
-    uploadedFileName = file.name;
-    let fileRead = new FileReader();
-    fileRead.onload = function() {
-      // fetch file content
-      uploadedFileContent = fileRead.result;
-
-      // create ui
-      createFile(uploadedFileName);
-      // create set content
-      filesData[uploadedFileName] = uploadedFileContent;
-      // load content to text area
-      textArea.value = filesData[uploadedFileName];
-      // have access to name and content
-      // place number of line
-      line = 1;
-      updateLines();
-    }
-    fileRead.readAsText(file);
-
-  })
 }
-
 
 
 // get filename
