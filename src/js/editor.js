@@ -10,8 +10,10 @@ let filesData = [];
 // number of lines in text-area
 let lines = 1;
 
+const textArea = document.getElementById("text-area");
+
 // fix tab issue
-document.getElementById("text-area").addEventListener("keydown", function (e) {
+textArea.addEventListener("keydown", function (e) {
   if (e.key == "Tab") {
     e.preventDefault();
     var start = this.selectionStart;
@@ -49,7 +51,7 @@ function downloadFile() {
     alert("please create file");
     return;
   }
-  const fileContent = document.getElementById("text-area").value;
+  const fileContent = textArea.value;
   download(currentFileName, fileContent);
 }
 
@@ -73,7 +75,7 @@ function upload() {
       // create set content
       filesData[uploadedFileName] = uploadedFileContent;
       // load content to text area
-      document.getElementById("text-area").value = filesData[uploadedFileName];
+      textArea.value = filesData[uploadedFileName];
       // have access to name and content
       // place number of line
       line = 1;
@@ -109,7 +111,7 @@ function createFile(customName) {
 
 
   // open new file content
-  document.getElementById("text-area").value = "";
+  textArea.value = "";
 
   // update lines
   console.log("here");
@@ -235,7 +237,7 @@ function loadFile(id) {
   updatePrevColor();
 
   currentFileName = id;
-  document.getElementById("text-area").value = filesData[currentFileName];
+  textArea.value = filesData[currentFileName];
   // change style of selected file box
   changeColor(currentFileName);
 }
@@ -282,14 +284,14 @@ function deleteFile(event, elem) {
   console.log(id);
   delete filesData[id];
   document.getElementById(id).remove();
-  document.getElementById("text-area").value = "";
+  textArea.value = "";
   clearPage();
   // filesData.splice(event.target.id, 1);
 }
 
 
 function saveChanges() {
-  const fileContent = document.getElementById("text-area").value;
+  const fileContent = textArea.value;
 
   // store files
   filesData[currentFileName] = fileContent;
@@ -297,7 +299,7 @@ function saveChanges() {
 
 
 function clearPage() {
-  document.getElementById("text-area").value = "";
+  textArea.value = "";
   currentFileName = "";
   // reset line counter
   removeLines(calcLines())
@@ -332,7 +334,7 @@ function updateLines(event) {
 // return number of lines
 function calcLines() {
   // count number of lines
-  const fileContent = document.getElementById("text-area").value;
+  const fileContent = textArea.value;
   return fileContent.split(/\r\n|\r|\n/).length // add 1 to pass new line
 }
 
@@ -390,4 +392,16 @@ function scrollToTop(id) {
   console.log(div.scroolTop);
   div.scrollTop = 0; 
   console.log(div.scroolTop);
+}
+
+// copy content of current file
+function copyFile() {
+  /* Select the text field */
+  const textArea = document.getElementById("text-area");
+
+  textArea.select();
+  textArea.setSelectionRange(0, 99999); /* For mobile devices */
+
+  /* Copy the text inside the text field */
+  navigator.clipboard.writeText(textArea.value);
 }
