@@ -53,37 +53,37 @@ function downloadFile() {
   download(currentFileName, fileContent);
 }
 
-// create upload listener 
-const fileUpload = document.getElementById('uploaded-file');
-fileUpload.addEventListener('change', function () {
-  const file = fileUpload.files[0];
-  // set file name
-  uploadedFileName = file.name;
-  let fileRead = new FileReader();
-  fileRead.onload = function() {
-    // fetch file content
-    uploadedFileContent = fileRead.result;
-    // create ui
-    createFile(uploadedFileName);
-    // create set content
-    filesData[uploadedFileName] = uploadedFileContent;
-    // load content to text area
-    document.getElementById("text-area").value = filesData[uploadedFileName];
-    // have access to name and content
-    // place number of line
-    line = 1;
-    updateLines();
-  }
-  fileRead.readAsText(file);
-})
-
 // upload file from local
 function upload() {
   let uploadedFileName = "";
   let uploadedFileContent = "";
-  // call upload listener
+  const fileUpload = document.getElementById('uploaded-file');
   fileUpload.click();
+  fileUpload.addEventListener('change', function () {
+    const file = fileUpload.files[0];
+    // set file name
+    uploadedFileName = file.name;
+    let fileRead = new FileReader();
+    fileRead.onload = function() {
+      // fetch file content
+      uploadedFileContent = fileRead.result;
+
+      // create ui
+      createFile(uploadedFileName);
+      // create set content
+      filesData[uploadedFileName] = uploadedFileContent;
+      // load content to text area
+      document.getElementById("text-area").value = filesData[uploadedFileName];
+      // have access to name and content
+      // place number of line
+      line = 1;
+      updateLines();
+    }
+    fileRead.readAsText(file);
+
+  })
 }
+
 
 
 // get filename
@@ -112,6 +112,7 @@ function createFile(customName) {
   document.getElementById("text-area").value = "";
 
   // update lines
+  console.log("here");
   updateLines();
 
   // update previously selected color
@@ -164,6 +165,7 @@ function renameFile() {
   if (editedFileName === currentFileName)
     currentFileName = newFileName;
 
+  console.log(temp);
 
 }
 
@@ -174,9 +176,9 @@ function createComponent() {
   //  const template
   const template = `
   <!-- button template -->
-  <div class="d-flex justify-content-between file-box theme-white align-items-baseline shadow p-2 rounded my-2"
-       onclick="loadFile('${currentFileName}')"
-       id="${currentFileName}"
+  <div class="d-flex justify-content-between file-box theme-white align-items-baseline shadow p-2 rounded my-2" 
+       onclick="loadFile('${currentFileName}')" 
+       id="${currentFileName}" 
        style="cursor: pointer;">
     <div style="user-select: none" >
     ${currentFileName}
@@ -277,6 +279,7 @@ function deleteFile(event, elem) {
   event.stopPropagation();
 
   const id = elem.parentNode.parentNode.id;
+  console.log(id);
   delete filesData[id];
   document.getElementById(id).remove();
   document.getElementById("text-area").value = "";
@@ -310,13 +313,17 @@ function updateLines(event) {
   // count number of lines
   const numOfLine = calcLines()
   const lineDiff = numOfLine - lines;
+  console.log("line state: " + lines)
+  console.log("num of lines: " + numOfLine)
   if (lineDiff > 0) {
+    console.log("add new line")
     putLines(Math.abs(lineDiff));
-    // handle the overflowed text
+    // handle the overflowed text 
     //scrollToBottom("editor");
     scrollToTop("text-area");
   }
   else if (lineDiff < 0 && lines != 1) {
+    console.log("remove line")
     // remeove last count
     removeLines(Math.abs(lineDiff));
   }
@@ -373,11 +380,14 @@ rename.addEventListener("keyup", function (event) {
 
 function scrollToBottom (id) {
   var div = document.getElementById(id);
+  console.log(div.scroolTop);
   div.scrollTop = div.scrollHeight - div.clientHeight;
 }
 
 
 function scrollToTop(id) {
   var div = document.getElementById(id);
-  div.scrollTop = 0;
+  console.log(div.scroolTop);
+  div.scrollTop = 0; 
+  console.log(div.scroolTop);
 }
