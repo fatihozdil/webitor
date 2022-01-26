@@ -9,6 +9,7 @@ body, #editor {
 #text-area:focus {
     outline: none ;
     filter: brightness(95%);
+    overflow-x: auto !important;
 }
 
 /* font awaesome font color */
