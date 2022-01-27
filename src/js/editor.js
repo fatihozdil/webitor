@@ -245,6 +245,9 @@ function loadFile(id) {
   textArea.value = filesData[currentFileName];
   // change style of selected file box
   changeColor(currentFileName);
+  
+  // update lines
+  updateLines()
 }
 
 
