@@ -113,19 +113,17 @@ function createFile(customName) {
   // open new file content
   textArea.value = "";
 
-  // update lines
-  console.log("here");
-  updateLines();
 
   // update previously selected color
   updatePrevColor();
 
-
   currentFileName = filename;
 
+  // update lines
+  updateLines();
 
   // craete new file box component
-  createComponent();
+   createComponent();
 }
 
 
@@ -299,7 +297,6 @@ function deleteFile(event, elem) {
 
 function saveChanges() {
   const fileContent = textArea.value;
-
   // store files
   filesData[currentFileName] = fileContent;
 }
