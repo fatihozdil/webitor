@@ -31,3 +31,25 @@ body, #editor {
     background-color: #282A36 !important;
     color: #f8f8f2 !important;
 }
+
+/* custom scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    padding: 0px 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6272a4;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    filter: brightness(500%);
+}
