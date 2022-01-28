@@ -55,7 +55,7 @@ function downloadFile() {
   download(currentFileName, fileContent);
 }
 
-// create upload listener 
+// create upload listener
 const fileUpload = document.getElementById('uploaded-file');
 fileUpload.addEventListener('change', function () {
   const file = fileUpload.files[0];
@@ -81,6 +81,7 @@ fileUpload.addEventListener('change', function () {
 
 // upload file from local
 function upload() {
+
   let uploadedFileName = "";
   let uploadedFileContent = "";
   // call upload listener
@@ -110,8 +111,9 @@ function createFile(customName) {
   }
 
 
-  // open new file content
-  textArea.value = "";
+  // open new file content it is not first
+  if (filesData.length != 0)
+    textArea.value = "";
 
 
   // update previously selected color
@@ -123,7 +125,7 @@ function createFile(customName) {
   updateLines();
 
   // craete new file box component
-   createComponent();
+  createComponent();
 }
 
 
@@ -165,7 +167,6 @@ function renameFile() {
   if (editedFileName === currentFileName)
     currentFileName = newFileName;
 
-  console.log(temp);
 
 }
 
@@ -176,9 +177,9 @@ function createComponent() {
   //  const template
   const template = `
   <!-- button template -->
-  <div class="d-flex justify-content-between file-box theme-white align-items-baseline shadow p-2 rounded my-1  rounded-0" 
-       onclick="loadFile('${currentFileName}')" 
-       id="${currentFileName}" 
+  <div class="d-flex justify-content-between file-box theme-white align-items-baseline shadow p-2 rounded my-1  rounded-0"
+       onclick="loadFile('${currentFileName}')"
+       id="${currentFileName}"
        style="cursor: pointer;">
     <div class="overflow-hidden" style="user-select: none" >
     ${currentFileName}
@@ -186,7 +187,7 @@ function createComponent() {
     <div class="d-flex" >
       <!-- update file name -->
       <button type="button"
-      class="me-2 btn btn-sm"
+      class="btn btn-sm"
       onclick="setNewFileName(event, '${currentFileName}')"
       data-bs-toggle="modal"
       data-bs-target="#update-file-name" title="rename file">
@@ -207,7 +208,7 @@ function createComponent() {
   // set add
   files.insertAdjacentHTML('beforeend', template);
 
-  // if dark mode on 
+  // if dark mode on
   // create white file boxes
   if (isDarkModeOn)
     elementThemeSwitcher(`${currentFileName}`);
@@ -245,7 +246,7 @@ function loadFile(id) {
   textArea.value = filesData[currentFileName];
   // change style of selected file box
   changeColor(currentFileName);
-  
+
   // update lines
   updateLines()
 }
@@ -289,7 +290,6 @@ function deleteFile(event, elem) {
   event.stopPropagation();
 
   const id = elem.parentNode.parentNode.id;
-  console.log(id);
   delete filesData[id];
   document.getElementById(id).remove();
   textArea.value = "";
@@ -309,7 +309,7 @@ function clearPage() {
   textArea.value = "";
   currentFileName = "";
   // reset line counter
-  removeLines(calcLines())
+  // removeLines(calcLines())
   updateLines()
 }
 
@@ -322,17 +322,13 @@ function updateLines(event) {
   // count number of lines
   const numOfLine = calcLines()
   const lineDiff = numOfLine - lines;
-  console.log("line state: " + lines)
-  console.log("num of lines: " + numOfLine)
   if (lineDiff > 0) {
-    console.log("add new line")
     putLines(Math.abs(lineDiff));
-    // handle the overflowed text 
+    // handle the overflowed text
     //scrollToBottom("editor");
     scrollToTop("text-area");
   }
   else if (lineDiff < 0 && lines != 1) {
-    console.log("remove line")
     // remeove last count
     removeLines(Math.abs(lineDiff));
   }
@@ -361,44 +357,15 @@ function removeLines(n) {
   }
 }
 
-/*
-  // add event listener to enter button
-const rename = document.getElementById('rename')
-rename.addEventListener("keyup", function (event) {
-
-  if (event.keyCode === 13) {
-    event.preventDefault()
-    setFileName();
-  }
-});
-*/
-
-
-/*
-  // save changes with ctrl+s
-const rename = document.getElementById('rename')
-rename.addEventListener("keyup", function (event) {
-
-  if (event.keyCode === 17 && event.keyCode === 83) {
-    event.preventDefault()
-    saveChanges();
-    console.log("all changes are saved");
-  }
-});
-*/
-
 function scrollToBottom (id) {
   var div = document.getElementById(id);
-  console.log(div.scroolTop);
   div.scrollTop = div.scrollHeight - div.clientHeight;
 }
 
 
 function scrollToTop(id) {
   var div = document.getElementById(id);
-  console.log(div.scroolTop);
-  div.scrollTop = 0; 
-  console.log(div.scroolTop);
+  div.scrollTop = 0;
 }
 
 // copy content of current file
@@ -412,3 +379,5 @@ function copyFile() {
   /* Copy the text inside the text field */
   navigator.clipboard.writeText(textArea.value);
 }
+
+
