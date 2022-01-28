@@ -297,84 +297,33 @@
         <div class="container-fluid h-100">
           <div class="row h-100 ">
             <!-- file manager -->
-            <div class="col-md-3 d-none d-md-block overflow-auto h-100 card rounded-0 theme-white" id="files">
-
-              <div class="row">
-                <div class="col">
-
-                  <div class="w-100  mx-0 my-2 py-1 d-flex justify-content-center  align-items-baseline mb-3">
-                    <div class="p-0">
-                      <!-- create file button -->
-                      <button type="button" title="create file" class="btn btn-sm theme-white" data-bs-toggle="modal"
-                                                                           data-bs-target="#filename-modal">
-                        <i class="fas fa-file-plus fa-2x"></i>
-                      </button>
-                      <!-- file name input model -->
-                      <div class="modal fade " id="filename-modal" data-bs-keyboard="false" tabindex="-1"
-                                                                                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content theme-white">
-                            <div class="modal-body" id="rename">
-
-                              <div class="input-group input-group-sm">
-                                <div class="container p-0">
-                                  <div class="row">
-                                    <div class="col-8">
-                                      <input type="text" class="form-control" placeholder="type file name"
-                                                                              id="new-filename" aria-label="Sizing example input"
-                                                                                                aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-                                    <div class="col-2 p-0 d-flex justify-content-end ">
-                                      <button type="button" data-bs-dismiss="modal" onclick="createFile()"
-                                                                                    class="btn btn-sm theme-black rounded mx-2">create</button>
-                                    </div>
-                                    <div class="col-2 p-0 d-flex justify-content-end ">
-                                      <button type="button" data-bs-dismiss="modal"
-                                                            class="btn btn-sm theme-white rounded mx-2 ">cancel</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class=" p-0">
-                      <div class="input-group px-3 d-flex justify-content-center">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username"
-                                                                                     aria-describedby="button-addon2">
-                        <button class="btn btn-sm theme-black" type="button" id="button-addon2">
-                          <i class="fas fa-search fa-1x"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class=" p-0">
-                      <input class="d-none" type="file"  id="uploaded-file" name="filename">
-                      <button type="button" onclick="upload()" title="upload file" class="btn btn-sm theme-white rounded">
-                        <i class="fas fa-file-upload  fa-2x"></i>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+            <div class="col-md-2 p-0 d-none d-md-block overflow-auto h-100 card rounded-0 theme-white" id="files">
 
             </div>
             <!-- where the text edited -->
-            <div class="col-md-9 h-100">
+            <div class="col-md-10 h-100">
 
               <!-- text editor nav -->
               <div class="row card rounded-0 theme-white" id="editor-nav" style="height: 54.23px">
-                <div class="col d-flex align-items-center justify-content-end">
-                  <div class="rows d-flex">
-                    <span class="form-switch d-flex align-items-center mx-2">
+                <div class="col p-0 d-flex align-items-center justify-content-between">
+                  <div class="d-flex">
+                      <!-- create file button -->
+                      <button type="button" title="create file" class="btn btn-sm theme-white mx-2" data-bs-toggle="modal"
+                                                                           data-bs-target="#filename-modal">
+                        <i class="fas fa-file-plus fa-2x"></i>
+                      </button>
 
-                      <label class="form-check-label me-5" for="flexSwitchCheckDefault">Dark Mode</label>
-                      <input data-bs-toggle="tooltip" data-bs-placement="left" onchange="switchMode()" title="switch mode"
-                                                                                                       class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    </span>
+                      <!-- required for upload file -->
+                      <input class="d-none" type="file"  id="uploaded-file" name="filename">
+                      <button type="button" onclick="upload()" title="upload file" class="btn btn-sm theme-white rounded mx-2">
+                        <i class="fas fa-file-upload  fa-2x"></i>
+                      </button>
+
+                      <button onclick="downloadFile()" title="download file" type="button" class="btn btn-sm theme-white mx-2">
+                        <i class="fas fa-file-download fa-2x"></i>
+                      </button>
+                  </div>
+                  <div class="d-flex">
                     <!-- button type="button" onclick="saveChanges()" class="btn btn-sm theme-black rounded mx-3">
                       save changes
                     </button -->
@@ -382,9 +331,13 @@
                     <button onclick="copyFile()" title="copy to clickboard" type="button" class="btn btn-sm theme-white mx-2">
                       <i class="fas fa-copy fa-2x"></i>
                     </button>
-                    <button onclick="downloadFile()" title="download file" type="button" class="btn btn-sm theme-white mx-2">
-                      <i class="fas fa-file-download fa-2x"></i>
-                    </button>
+
+                    <span class="form-switch d-flex align-items-center mx-2 p-0">
+
+                      <label class="form-check-label me-5" for="flexSwitchCheckDefault">Dark Mode</label>
+                      <input data-bs-toggle="tooltip" data-bs-placement="left" onchange="switchMode()" title="switch mode"
+                                                                                                       class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    </span>
                   </div>
                 </div>
               </div>
@@ -412,6 +365,39 @@
         </div>
       </main>
     </div>
+
+
+    <!-- file name input model -->
+    <div class="modal fade " id="filename-modal" data-bs-keyboard="false" tabindex="-1"
+                                                                          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content theme-white">
+          <div class="modal-body" id="rename">
+
+            <div class="input-group input-group-sm">
+              <div class="container p-0">
+                <div class="row">
+                  <div class="col-8">
+                    <input type="text" class="form-control" placeholder="type file name"
+                                                            id="new-filename" aria-label="Sizing example input"
+                                                                              aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="col-2 p-0 d-flex justify-content-end ">
+                    <button type="button" data-bs-dismiss="modal" onclick="createFile()"
+                                                                  class="btn btn-sm theme-black rounded mx-2">create</button>
+                  </div>
+                  <div class="col-2 p-0 d-flex justify-content-end ">
+                    <button type="button" data-bs-dismiss="modal"
+                                          class="btn btn-sm theme-white rounded mx-2 ">cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
