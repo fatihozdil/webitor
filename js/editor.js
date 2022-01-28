@@ -112,7 +112,7 @@ function createFile(customName) {
 
 
   // open new file content it is not first
-  if (filesData.length != 0)
+  if (Object.keys(filesData).length != 0)
     textArea.value = "";
 
 
