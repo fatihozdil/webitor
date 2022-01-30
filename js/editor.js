@@ -107,7 +107,7 @@ function createFile(customName) {
   // prevent to create same file
   if (filesData[filename] != undefined) {
     alert(`file '${filename}' already exist`);
-    return;
+    throw `file '${filename}' already exist`
   }
 
 
