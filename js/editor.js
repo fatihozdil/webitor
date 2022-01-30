@@ -290,11 +290,16 @@ function deleteFile(event, elem) {
   event.stopPropagation();
 
   const id = elem.parentNode.parentNode.id;
+  const isCurrentFileDeleted = id == currentFileName
   delete filesData[id];
+  // remove ui element
   document.getElementById(id).remove();
-  textArea.value = "";
-  clearPage();
-  // filesData.splice(event.target.id, 1);
+  if (isCurrentFileDeleted) { 
+    clearPage();
+    // load first created file, if there is
+    loadFile(Object.keys(filesData)[0])
+  }
+   
 }
 
 
