@@ -177,7 +177,7 @@ function createComponent() {
   //  const template
   const template = `
   <!-- button template -->
-  <div class="d-flex justify-content-between file-box theme-white align-items-baseline shadow p-2 rounded my-1  rounded-0"
+  <div class="d-flex justify-content-between file-box theme-white align-items-center shadow p-2 rounded my-1  rounded-0"
        onclick="loadFile('${currentFileName}')"
        id="${currentFileName}"
        style="cursor: pointer;">
