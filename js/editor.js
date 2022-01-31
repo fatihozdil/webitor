@@ -299,7 +299,8 @@ function deleteFile(event, elem) {
   if (isCurrentFileDeleted) { 
     clearPage();
     // load first created file, if there is
-    loadFile(Object.keys(filesData)[0])
+    if (Object.keys(filesData).length != 0)
+      loadFile(Object.keys(filesData)[0])
   }
    
 }
